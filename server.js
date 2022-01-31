@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express, { json, urlencoded } from 'express';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 
 // import routes
 import authRouter from './routes/auth.js';
@@ -13,6 +14,7 @@ const mongo = process.env.MONGO_URI;
 
 app.use(json());
 app.use(urlencoded());
+app.use(cookieParser());
 
 app.get('/api', (req, res) => {
   res.send('Fullstack React Course Express Server');
