@@ -1,26 +1,34 @@
 import dotenv from 'dotenv';
 import express, { json, urlencoded } from 'express';
+import mongoose from 'mongoose';
+
+// import routes
+import authRouter from './routes/auth.js';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+const mongo = process.env.MONGO_URI;
 
 app.use(json());
 app.use(urlencoded());
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Fullstack React Course Express Server');
 });
 
-app.post('/name', (req, res) => {
-  if (req.body.name) {
-    return res.json({ name: req.body.name });
-  } else {
-    return res.status(400).json({ error: 'no name provided' });
-  }
-});
+app.use('/api/auth', authRouter);
 
-app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
-});
+mongoose
+  .connect(mongo)
+  .then(() => {
+    console.log('connected to database');
+
+    app.listen(port, () => {
+      console.log(`server is running on port ${port}`);
+    });
+  })
+  .catch(error => {
+    console.log(error);
+  });
