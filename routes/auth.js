@@ -10,7 +10,7 @@ const router = express.Router();
 // @desc    Test the auth route
 // @access  Public
 router.get('/test', (req, res) => {
-  res.send('Auth route working');
+  res.send(`Auth's route working`);
 });
 
 // @route   POST /api/auth/register

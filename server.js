@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
 // import routes
-import authRouter from './routes/auth.js';
+import authRoute from './routes/auth.js';
+import ToDosRoute from './routes/todos.js';
 
 dotenv.config();
 
@@ -20,7 +21,8 @@ app.get('/api', (req, res) => {
   res.send('Fullstack React Course Express Server');
 });
 
-app.use('/api/auth', authRouter);
+app.use('/api/auth', authRoute);
+app.use('/api/todos', ToDosRoute);
 
 mongoose
   .connect(mongo)
