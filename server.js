@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 const mongo = process.env.MONGO_URI;
 
 app.use(json());
-app.use(urlencoded());
+app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.get('/api', (req, res) => {
